@@ -18,7 +18,7 @@ module Jekyll
       def title
         if @title.nil?
           if not @match.nil?
-            match_title
+            match_title @match
           else
             @name
           end  
@@ -27,9 +27,9 @@ module Jekyll
         end
       end
 
-      def match_title
-	if not @match.data.nil? and @match.data.include? 'title'
-	  @match.data['title']
+      def match_title(m)
+	if not m.data.nil? and m.data.include? 'title'
+	  m.data['title']
 	end
       end
       
@@ -42,11 +42,11 @@ module Jekyll
       end
       
       def match_post(posts)
-        @match = posts.find { |p| p.slug.downcase == @name.downcase }
+        @match = posts.find { |p| p.slug.downcase == @name.downcase or match_title(p) == name }
       end
       
       def match_page(pages)
-        @match = pages.find { |p| p.basename.downcase == @name.downcase  }
+        @match = pages.find { |p| p.basename.downcase == @name.downcase or match_title(p) == name }
       end
       
       def markdown
