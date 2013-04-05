@@ -17,14 +17,20 @@ module Jekyll
       
       def title
         if @title.nil?
-          if not @match.nil? && @match.data.has?('title')
-            @match.data['title']
+          if not @match.nil?
+            match_title
           else
             @name
           end  
         else
           @title
         end
+      end
+
+      def match_title
+	if not @match.data.nil? and @match.data.include? 'title'
+	  @match.data['title']
+	end
       end
       
       def url
