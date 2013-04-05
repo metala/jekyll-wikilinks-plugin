@@ -32,7 +32,7 @@ module Jekyll
       end
       
       def has_match?
-		not @match.nil?
+        not @match.nil?
       end
       
       def match_post(posts)
