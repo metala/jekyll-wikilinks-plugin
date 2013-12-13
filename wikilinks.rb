@@ -59,7 +59,7 @@ module Jekyll
     alias old_transform transform
 
     def transform
-      if converter.instance_of? MarkdownConverter
+      if converter.instance_of? Jekyll::Converters::Markdown
         pat = /\[\[(.+?)\]\]/
         @content = @content.gsub(pat) do |m|
           wl = Wikilinks::Wikilink.parse(m)
